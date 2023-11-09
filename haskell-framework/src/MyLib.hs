@@ -1,4 +1,7 @@
-module MyLib (someFunc) where
+module MyLib where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Foreign.C
+
+hs_double :: CInt -> CInt
+hs_double x = 2 * x
+
