@@ -23,3 +23,22 @@ library
     build-depends:    base ^>=4.19.0.0
     hs-source-dirs:   src
     default-language: GHC2021
+
+foreign-library haskell-foreign-framework
+    type: native-shared
+
+    -- This should work on Mac, despite being undefined behaviour
+    -- See https://www.hobson.space/posts/haskell-foreign-library/ (great read)
+    options: standalone
+
+    -- We copy the C stub headers to a folder in the root.
+    -- If you have foreign-export declarations in the library
+    -- be sure to add this flag there too (so all stubs get added
+    -- to the `haskell-framework-include` folder)
+    ghc-options: -stubdir=haskell-framework-include
+
+    other-modules: MyForeignLib
+    build-depends: base, haskell-framework
+    hs-source-dirs: flib
+
+
