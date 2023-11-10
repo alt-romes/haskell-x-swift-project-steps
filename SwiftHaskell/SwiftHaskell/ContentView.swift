@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HaskellFramework.MyForeignLib_stub
 
 struct ContentView: View {
     var body: some View {
