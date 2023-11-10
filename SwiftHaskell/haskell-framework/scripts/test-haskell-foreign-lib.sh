@@ -23,10 +23,7 @@ echo "
 #include <MyForeignLib_stub.h>
 #include <HsFFI.h>
 int main(void) {
-    int argc = 0;
-    char* argv[] = { NULL };
-    char** argp = argv;
-    hs_init(&argc, &argp);
+    hs_init(NULL, NULL);
     printf(\"%d\n\", hs_factorial(5));
     hs_exit();
     return 0;
