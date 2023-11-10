@@ -7,7 +7,14 @@ if ! test -f "haskell-framework.cabal"; then
     exit 1
 fi
 
-HS_FLIB_PATH=$(dirname $(find . -name libhaskell-foreign-framework.dylib))
+HS_FLIB=$(find . -name libhaskell-foreign-framework.dylib)
+
+if test -z $HS_FLIB; then
+    echo "Shared library not found! Did you run 'cabal build'?"
+    exit 1
+fi
+
+HS_FLIB_PATH=$(dirname $HS_FLIB)
 HS_HEADERS_PATH=haskell-framework-include
 
 echo "
@@ -19,7 +26,7 @@ int main(void) {
     char* argv[] = { NULL };
     char** argp = argv;
     hs_init(&argc, &argp);
-    printf(\"%d\n\", hs_double(4));
+    printf(\"%d\n\", hs_factorial(5));
     hs_exit();
     return 0;
 }
@@ -35,7 +42,7 @@ ghc -no-hs-main -o conftest conftestmain.c \
 
 RESULT=$(./conftest)
 
-if [ 8 -eq $RESULT ]; then
+if [ 120 -eq $RESULT ]; then
     echo "Foreign library successfully called!"
 else
     echo "Bad bad foreign library!"
