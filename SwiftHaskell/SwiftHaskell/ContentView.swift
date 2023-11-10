@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Hello, Haskell: \(hs_double(9))!")
+            Text("Hello, Haskell: \(hs_factorial(5))!")
         }
         .padding()
     }
