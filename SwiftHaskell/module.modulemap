@@ -11,5 +11,6 @@ module HaskellFramework {
     explicit module * {
         export *
     }
-}
 
+    link "haskell-foreign-framework"
+}
