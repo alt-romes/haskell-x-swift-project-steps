@@ -33,7 +33,9 @@ ghc -no-hs-main -o conftest conftestmain.c \
     -L"$HS_FLIB_PATH" \
     -optl-Wl,-rpath,"$HS_FLIB_PATH"
 
-if [ 8 -eq $(./conftest) ]; then
+RESULT=$(./conftest)
+
+if [ 8 -eq $RESULT ]; then
     echo "Foreign library successfully called!"
 else
     echo "Bad bad foreign library!"
