@@ -7,6 +7,7 @@ if ! test -f "haskell-framework.cabal"; then
     exit 1
 fi
 
+# Alternatively, run `cabal list-bin haskell-foreign-framework`
 HS_FLIB=$(find . -name libhaskell-foreign-framework.dylib)
 
 if test -z $HS_FLIB; then
