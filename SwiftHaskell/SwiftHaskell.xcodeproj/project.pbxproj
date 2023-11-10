@@ -11,6 +11,7 @@
 		C356F9F42AFD970F00285AD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356F9F32AFD970F00285AD5 /* ContentView.swift */; };
 		C356F9F62AFD971000285AD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C356F9F52AFD971000285AD5 /* Assets.xcassets */; };
 		C356F9F92AFD971000285AD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C356F9F82AFD971000285AD5 /* Preview Assets.xcassets */; };
+		C356FA092AFDA14C00285AD5 /* BuildSettings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		C356F9F52AFD971000285AD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C356F9F82AFD971000285AD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C356F9FA2AFD971000285AD5 /* SwiftHaskell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftHaskell.entitlements; sourceTree = "<group>"; };
+		C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = BuildSettings.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 		C356F9E52AFD970F00285AD5 = {
 			isa = PBXGroup;
 			children = (
+				C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */,
 				C356F9F02AFD970F00285AD5 /* SwiftHaskell */,
 				C356F9EF2AFD970F00285AD5 /* Products */,
 			);
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C356FA092AFDA14C00285AD5 /* BuildSettings.xcconfig in Resources */,
 				C356F9F92AFD971000285AD5 /* Preview Assets.xcassets in Resources */,
 				C356F9F62AFD971000285AD5 /* Assets.xcassets in Resources */,
 			);
@@ -149,6 +153,7 @@
 /* Begin XCBuildConfiguration section */
 		C356F9FB2AFD971000285AD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -212,6 +217,7 @@
 		};
 		C356F9FC2AFD971000285AD5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
