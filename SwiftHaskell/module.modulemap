@@ -1,0 +1,15 @@
+//
+//  module.modulemap
+//  SwiftHaskell
+//
+//  Created by Rodrigo Mesquita on 09/11/2023.
+//
+
+module HaskellFramework {
+    umbrella "haskell-framework/haskell-framework-include"
+
+    explicit module * {
+        export *
+    }
+}
+
