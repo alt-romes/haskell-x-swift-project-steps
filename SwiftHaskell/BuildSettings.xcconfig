@@ -1,1 +1,2 @@
 SWIFT_INCLUDE_PATHS=$(PROJECT_DIR)
+#include "DynamicBuildSettings.xcconfig"
