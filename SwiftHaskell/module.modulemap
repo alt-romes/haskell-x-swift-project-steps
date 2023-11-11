@@ -12,5 +12,9 @@ module HaskellFramework {
         export *
     }
 
+    explicit module RTSManage {
+        header "haskell-framework/cbits/MyForeignLibRts.h"
+    }
+
     link "haskell-foreign-framework"
 }
