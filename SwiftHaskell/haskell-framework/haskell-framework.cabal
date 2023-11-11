@@ -41,4 +41,7 @@ foreign-library haskell-foreign-framework
     build-depends: base, haskell-framework
     hs-source-dirs: flib
 
+    include-dirs: cbits
+    c-sources: cbits/MyForeignLibRts.c
+    install-includes: MyForeignLibRts.h
 
