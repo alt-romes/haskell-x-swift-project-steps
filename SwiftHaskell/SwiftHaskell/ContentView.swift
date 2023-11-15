@@ -25,8 +25,7 @@ struct User {
 
 func mkSimpleUser (age: Int64) -> User {
     let x:UnsafeMutableRawPointer = mk_simple_user(age)!
-    let y:UnsafeMutableRawPointer = derefsp(x)!
-    return (y).load(fromByteOffset: 8, as: User.self)
+    return (x).load(fromByteOffset: 8, as: User.self)
 }
 
 #Preview {
