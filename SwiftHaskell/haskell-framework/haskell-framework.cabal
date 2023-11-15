@@ -13,18 +13,19 @@ extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
 common warnings
-    ghc-options: -Wall
+    ghc-options: -Wall -O -ddump-cmm -ddump-asm -ddump-to-file -dno-typeable-binds
 
 library
     import:           warnings
     exposed-modules:  MyLib
     -- other-modules:
     -- other-extensions:
-    build-depends:    base ^>=4.19.0.0
+    build-depends:    base ^>=4.19.0.0, primitive, ghc-prim
     hs-source-dirs:   src
     default-language: GHC2021
 
 foreign-library haskell-foreign-framework
+    import:     warnings
     type: native-shared
 
     -- This should work on Mac, despite being undefined behaviour
@@ -38,7 +39,7 @@ foreign-library haskell-foreign-framework
     ghc-options: -stubdir=haskell-framework-include
 
     other-modules: MyForeignLib
-    build-depends: base, haskell-framework
+    build-depends: base, haskell-framework, primitive, ghc-prim
     hs-source-dirs: flib
 
     include-dirs: cbits
