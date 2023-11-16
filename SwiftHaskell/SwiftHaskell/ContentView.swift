@@ -9,10 +9,17 @@ import SwiftUI
 import HaskellFramework.MyForeignLib_stub
 
 struct ContentView: View {
+    @State private var u:User2 = User2(birthYear: 1999, age: 24)
+    
     var body: some View {
         VStack {
             Text("Hello, Haskell: \(hs_factorial(5))!")
-            Text("Hello, User: \(birthday(User2(birthYear: 1999, age: 25)).age)!")
+            Text("Hello, User: \(u.age)!")
+            Button {
+                u = birthday(u)
+            } label: {
+                Label("It's my birthday!", systemImage: "birthday.cake")
+            }
         }
         .padding()
     }
@@ -67,8 +74,9 @@ func birthday (_ u : User2) -> User2 {
                                 throw HsFFIError.requiredSizeIs(required_size)
                             }
                         }
-                        print("Got JSON from call: \(String(bytes: Data(res_ptr), encoding: .ascii) ?? "???")")
-                        return try dec.decode(User2.self, from: Data(bytesNoCopy: res_ptr.baseAddress!, count: size_ptr.baseAddress?.pointee ?? 0, deallocator: .none))
+                        let new_data = Data(bytesNoCopy: res_ptr.baseAddress!, count: size_ptr.baseAddress?.pointee ?? 0, deallocator: .none)
+                        print("Got JSON from call: \(String(bytes: new_data, encoding: .ascii) ?? "???")")
+                        return try dec.decode(User2.self, from: new_data)
                     }
                 } catch HsFFIError.requiredSizeIs(let required_size) {
                     print("Retrying with required size: \(required_size)")
