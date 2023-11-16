@@ -9,7 +9,7 @@ fi
 
 pushd . >/dev/null
 cd haskell-framework/
-cabal build all
+cabal build all --allow-newer
 ./scripts/test-haskell-foreign-lib.sh
 popd >/dev/null
 ./haskell-framework/scripts/gen-dynamic-settings.sh
