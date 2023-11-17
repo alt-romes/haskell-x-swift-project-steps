@@ -48,6 +48,8 @@ struct User2 : Codable {
         age: Int
 }
 
+//#from_haskell birthday User2 -> User2 c_birthday
+
 func birthday (_ u : User2) -> User2 {
     let enc = JSONEncoder()
     let dec = JSONDecoder()
@@ -67,7 +69,7 @@ func birthday (_ u : User2) -> User2 {
                 do {
                     return try withUnsafeTemporaryAllocation(byteCount: buf_size, alignment: 1) { res_ptr in
                         
-                        c_birthday(rawPtr.baseAddress, data_len, res_ptr.baseAddress, size_ptr.baseAddress)
+                        hbirthday(rawPtr.baseAddress, data_len, res_ptr.baseAddress, size_ptr.baseAddress)
                         
                         if let required_size = size_ptr.baseAddress?.pointee {
                             if required_size > buf_size {
@@ -83,7 +85,7 @@ func birthday (_ u : User2) -> User2 {
                     return try withUnsafeTemporaryAllocation(byteCount: required_size, alignment: 1) { res_ptr in
                         size_ptr.baseAddress?.pointee = required_size
                         
-                        c_birthday(rawPtr.baseAddress, data_len, res_ptr.baseAddress, size_ptr.baseAddress)
+                        hbirthday(rawPtr.baseAddress, data_len, res_ptr.baseAddress, size_ptr.baseAddress)
                         
                         return try dec.decode(User2.self, from: Data(bytesNoCopy: res_ptr.baseAddress!, count: size_ptr.baseAddress?.pointee ?? 0, deallocator: .none))
                     }

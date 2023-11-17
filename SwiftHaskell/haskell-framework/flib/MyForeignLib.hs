@@ -1,4 +1,5 @@
-{-# LANGUAGE BangPatterns, ForeignFunctionInterface, TypeApplications, MagicHash, ExtendedLiterals, DuplicateRecordFields #-}
+{-# LANGUAGE BangPatterns, ForeignFunctionInterface, TypeApplications,
+   MagicHash, ExtendedLiterals, DuplicateRecordFields, TemplateHaskell #-}
 module MyForeignLib where
 import GHC.Exts
 import Text.Printf
@@ -59,9 +60,15 @@ marshalUser ptr = poke ptr (mkSimpleUser 23)
 foreign export ccall marshalUser :: Ptr User -> IO ()
 
 
+
+
+
 birthday :: User2 -> User2
 birthday User2{age=x, birthYear=y}
   = User2{age=x+1, birthYear=y}
+
+-- Will be exported as hbirthday to Swift. Will it compile and work?
+$(foreignExportSwift 'birthday)
 
 c_birthday :: Ptr CChar -> Int -- User
            -> Ptr CChar -> Ptr Int -- Result user

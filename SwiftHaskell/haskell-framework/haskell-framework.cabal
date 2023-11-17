@@ -20,7 +20,7 @@ library
     exposed-modules:  MyLib
     -- other-modules:
     -- other-extensions:
-    build-depends:    base ^>=4.19.0.0, primitive, ghc-prim, derive-storable, aeson
+    build-depends:    base ^>=4.19.0.0, primitive, ghc-prim, derive-storable, aeson, template-haskell, bytestring
     hs-source-dirs:   src
     default-language: GHC2021
 
@@ -39,7 +39,7 @@ foreign-library haskell-foreign-framework
     ghc-options: -stubdir=haskell-framework-include
 
     other-modules: MyForeignLib
-    build-depends: base, haskell-framework, primitive, ghc-prim, derive-storable, aeson, bytestring
+    build-depends: base, haskell-framework, primitive, ghc-prim, derive-storable, aeson, bytestring, template-haskell
     hs-source-dirs: flib
 
     include-dirs: cbits
