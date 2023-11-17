@@ -108,3 +108,10 @@ factorial_each = mapM (fmap show . fact)
 $(foreignExportSwift 'factorial_each)
 
 
+readNumbers :: IO [String]
+readNumbers = do
+  print "Reading numbers!"
+  return . map show . read @[Int] $ "[10,20,30]"
+
+$(foreignExportSwift 'readNumbers)
+

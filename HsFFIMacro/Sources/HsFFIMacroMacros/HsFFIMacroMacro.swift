@@ -3,27 +3,6 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Implementation of the `stringify` macro, which takes an expression
-/// of any type and produces a tuple containing the value of that expression
-/// and the source code that produced the value. For example
-///
-///     #stringify(x + y)
-///
-///  will expand to
-///
-///     (x + y, "x + y")
-public struct StringifyMacro: ExpressionMacro {
-    public static func expansion(
-        of node: some FreestandingMacroExpansionSyntax,
-        in context: some MacroExpansionContext
-    ) -> ExprSyntax {
-        guard let argument = node.argumentList.first?.expression else {
-            fatalError("compiler bug: the macro does not have any arguments")
-        }
-
-        return "(\(argument), \(literal: argument.description))"
-    }
-}
 
 let knownCallingConvs = ["HsCallJSON"]
 
@@ -75,7 +54,7 @@ public struct ForeignImportHaskellMacro: PeerMacro {
             }).joined(separator: ", "),
         
             fcall:ExprSyntax =
-                "h\(fname)(\(raw: fcallArgs), res_ptr.baseAddress, size_ptr.baseAddress)",
+                "h\(fname)(\(raw: fcallArgs)\(raw: fcallArgs.isEmpty ? "" : ", ")res_ptr.baseAddress, size_ptr.baseAddress)",
             
             decodeAndReturnResult:StmtSyntax =
                 """
@@ -87,11 +66,12 @@ public struct ForeignImportHaskellMacro: PeerMacro {
         return [
         """
         func \(fname)(\(raw: args)) -> \(retType) {
-          let hs_enc = JSONEncoder()
+          \(raw: args.isEmpty ? "" : "let hs_enc = JSONEncoder()")
           let hs_dec = JSONDecoder()
           do {
             \(raw: encodedArgs)
-            return \(raw: pointersToArgs)
+            return try {
+              \(raw: pointersToArgs)
                 // Allocate buffer for result and allocate a pointer to an int with the initial size of the buffer
                 let buf_size = 1024000
                 enum HsFFIError: Error {
@@ -124,6 +104,7 @@ public struct ForeignImportHaskellMacro: PeerMacro {
                     }
                 }
               \(raw: closePointersToArgsClosures)
+            }()
           } catch {
               fatalError("Error decoding JSON marshaled from Haskell, probably: \\(error)")
           }
