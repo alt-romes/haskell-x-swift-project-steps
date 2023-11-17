@@ -15,6 +15,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Hello, Haskell: \(hs_factorial(5))!")
+            
+            Text("Factorial of each: \( factorial_each(lista: [1,2,3,4,5,6,7,8,9,10]).joined(separator: ", ")) ")
+            
             Text("Hello, User: \(u.age)!")
             Button {
                 u = birthday(u)
@@ -25,6 +28,9 @@ struct ContentView: View {
         .padding()
     }
 }
+
+@ForeignImportHaskell
+func factorial_each(cconv: HsCallJSON, lista: [Int]) -> [String] { fatalError() }
 
 struct User: Codable {
     let birthYear: Int64,

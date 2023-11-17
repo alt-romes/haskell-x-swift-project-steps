@@ -14,7 +14,7 @@ import System.IO
 import Data.IORef
 import Unsafe.Coerce
 
-import Data.ByteString
+import Data.ByteString hiding (map)
 
 import Data.Aeson
 import Data.ByteString.Unsafe
@@ -94,4 +94,17 @@ c_birthday cstr clen result size_ptr = do
          moveBytes result ptr len
 
 foreign export ccall c_birthday :: Ptr CChar -> Int -> Ptr CChar -> Ptr Int -> IO ()
+
+
+
+
+
+fact :: Int -> IO Int
+fact x = pure $ product [1..x]
+
+factorial_each :: [Int] -> IO [String]
+factorial_each = mapM (fmap show . fact)
+
+$(foreignExportSwift 'factorial_each)
+
 
