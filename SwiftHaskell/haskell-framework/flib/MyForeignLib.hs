@@ -64,11 +64,14 @@ foreign export ccall marshalUser :: Ptr User -> IO ()
 
 
 birthday :: User2 -> User2
-birthday User2{age=x, birthYear=y}
-  = User2{age=x+1, birthYear=y}
+birthday User2{age=x, birthYear=y} = User2{age=x+1, birthYear=y}
 
--- Will be exported as hbirthday to Swift. Will it compile and work?
 $(foreignExportSwift 'birthday)
+
+
+
+
+
 
 c_birthday :: Ptr CChar -> Int -- User
            -> Ptr CChar -> Ptr Int -- Result user
