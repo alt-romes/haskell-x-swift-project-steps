@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C30DC6112B07EC0F007285F7 /* HsFFIMacro in Frameworks */ = {isa = PBXBuildFile; productRef = C30DC6102B07EC0F007285F7 /* HsFFIMacro */; };
 		C356F9F22AFD970F00285AD5 /* SwiftHaskellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356F9F12AFD970F00285AD5 /* SwiftHaskellApp.swift */; };
 		C356F9F42AFD970F00285AD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356F9F32AFD970F00285AD5 /* ContentView.swift */; };
 		C356F9F62AFD971000285AD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C356F9F52AFD971000285AD5 /* Assets.xcassets */; };
@@ -44,12 +45,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C30DC6112B07EC0F007285F7 /* HsFFIMacro in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C30DC60F2B07EC0F007285F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C356F9E52AFD970F00285AD5 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +66,7 @@
 				C356FA082AFDA14C00285AD5 /* BuildSettings.xcconfig */,
 				C356F9F02AFD970F00285AD5 /* SwiftHaskell */,
 				C356F9EF2AFD970F00285AD5 /* Products */,
+				C30DC60F2B07EC0F007285F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +115,9 @@
 			dependencies = (
 			);
 			name = SwiftHaskell;
+			packageProductDependencies = (
+				C30DC6102B07EC0F007285F7 /* HsFFIMacro */,
+			);
 			productName = SwiftHaskell;
 			productReference = C356F9EE2AFD970F00285AD5 /* SwiftHaskell.app */;
 			productType = "com.apple.product-type.application";
@@ -133,6 +146,9 @@
 				Base,
 			);
 			mainGroup = C356F9E52AFD970F00285AD5;
+			packageReferences = (
+				C3F020152B07EB77004F8310 /* XCLocalSwiftPackageReference "../HsFFIMacro" */,
+			);
 			productRefGroup = C356F9EF2AFD970F00285AD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -364,6 +380,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C3F020152B07EB77004F8310 /* XCLocalSwiftPackageReference "../HsFFIMacro" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../HsFFIMacro;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C30DC6102B07EC0F007285F7 /* HsFFIMacro */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3F020152B07EB77004F8310 /* XCLocalSwiftPackageReference "../HsFFIMacro" */;
+			productName = HsFFIMacro;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C356F9E62AFD970F00285AD5 /* Project object */;
 }

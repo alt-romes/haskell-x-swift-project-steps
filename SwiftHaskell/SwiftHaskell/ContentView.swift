@@ -7,9 +7,10 @@
 
 import SwiftUI
 import HaskellFramework.MyForeignLib_stub
+import HsFFIMacro
 
 struct ContentView: View {
-    @State private var u:User2 = User2(birthYear: 1999, age: 24)
+    @State private var u:User = User(birthYear: 1999, age: 24)
     
     var body: some View {
         VStack {
@@ -25,7 +26,7 @@ struct ContentView: View {
     }
 }
 
-struct User {
+struct User: Codable {
     let birthYear: Int64,
         age: Int64
 }
@@ -48,7 +49,8 @@ struct User2 : Codable {
         age: Int
 }
 
-//#from_haskell birthday User2 -> User2 c_birthday
+@ForeignImportHaskell
+func birthday(cconv: HsCallJSON, _ u : User) -> User { fatalError("impossible") }
 
 func birthday (_ u : User2) -> User2 {
     let enc = JSONEncoder()
