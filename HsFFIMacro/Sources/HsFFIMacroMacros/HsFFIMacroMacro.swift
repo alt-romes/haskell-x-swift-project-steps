@@ -45,13 +45,14 @@ public struct ForeignImportHaskellMacro: PeerMacro {
             throw ForeignImportHaskellError.noReturnClause
         }
         
-        let args = sig.parameterClause.parameters.dropFirst().map({ param in
-                guard let paraType = param.type.as(IdentifierTypeSyntax.self)?.name else { return "" }
-                return "\(param.firstName)\(param.secondName ?? ""): \(paraType)" }).joined(separator: ", "),
+        let usefulArgs = sig.parameterClause.parameters.dropFirst()
+        
+        let args = usefulArgs.map({ param in
+                "\(param.firstName)\(param.secondName ?? ""): \(param.type)" }).joined(separator: ", "),
             
-            argNames = sig.parameterClause.parameters.dropFirst().map({param in
+            argNames = usefulArgs.map({param in
                 let name = param.secondName ?? param.firstName
-                return name.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                return name.text.filter({ $0 != " " })
             }),
             
             encodedArgs = argNames.map({arg in
