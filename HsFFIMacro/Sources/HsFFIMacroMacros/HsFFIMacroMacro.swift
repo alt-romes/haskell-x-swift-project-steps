@@ -80,7 +80,7 @@ public struct ForeignImportHaskellMacro: PeerMacro {
                 """
                 let new_data = Data(bytesNoCopy: res_ptr.baseAddress!, count: size_ptr.baseAddress?.pointee ?? 0, deallocator: .none)
                 print("Read JSON from Haskell: \\(String(bytes: new_data, encoding: .ascii) ?? "???")")
-                return try hs_dec.decode(\(retType.self), from: new_data)
+                return try hs_dec.decode(\(retType).self, from: new_data)
                 """
         
         return [

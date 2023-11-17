@@ -13,10 +13,10 @@ let package = Package(
             name: "HsFFIMacro",
             targets: ["HsFFIMacro"]
         ),
-        .executable(
-            name: "HsFFIMacroClient",
-            targets: ["HsFFIMacroClient"]
-        ),
+//        .executable(
+//            name: "HsFFIMacroClient",
+//            targets: ["HsFFIMacroClient"]
+//        ),
     ],
     dependencies: [
         // Depend on the Swift 5.9 release of SwiftSyntax
