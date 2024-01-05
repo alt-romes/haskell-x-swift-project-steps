@@ -1,4 +1,4 @@
-{-# LANGUAGE DerivingStrategies, DeriveAnyClass #-}
+{-# LANGUAGE DerivingStrategies, DeriveAnyClass, OverloadedRecordDot #-}
 module MyLib where
 
 import Foreign.C
@@ -14,3 +14,6 @@ data User = User
   }
   deriving stock Generic
   deriving anyclass (ToJSON, FromJSON)
+
+birthday :: User -> User
+birthday user = user{age = user.age + 1}
