@@ -20,7 +20,7 @@ library
     exposed-modules:  MyLib
     -- other-modules:
     -- other-extensions:
-    build-depends:    base ^>=4.19.0.0
+    build-depends:    base ^>=4.19.0.0, aeson, bytestring
     hs-source-dirs:   src
     default-language: GHC2021
 
@@ -38,7 +38,7 @@ foreign-library haskell-foreign-framework
     ghc-options: -stubdir=haskell-framework-include
 
     other-modules: MyForeignLib
-    build-depends: base, haskell-framework
+    build-depends: base, haskell-framework, bytestring, aeson
     hs-source-dirs: flib
 
     include-dirs: cbits
