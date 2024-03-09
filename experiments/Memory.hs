@@ -1,8 +1,8 @@
 module Memory where
 
 data Rect
-  = Rect { width :: Int
-         , height :: Int
+  = Rect { width :: {-# UNPACK #-} !Int
+         , height :: {-# UNPACK #-} !Int
          }
 
 double :: Rect -> Rect
