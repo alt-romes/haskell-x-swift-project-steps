@@ -35,7 +35,7 @@ foreign-library haskell-foreign-framework
     -- If you have foreign-export declarations in the library
     -- be sure to add this flag there too (so all stubs get added
     -- to the `haskell-framework-include` folder)
-    ghc-options: -stubdir=haskell-framework-include
+    ghc-options: -stubdir=haskell-framework-include -ddump-cmm
 
     other-modules: MyForeignLib
     build-depends: base, haskell-framework, bytestring, aeson

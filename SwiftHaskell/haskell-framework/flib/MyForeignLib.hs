@@ -1,13 +1,18 @@
-{-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE ForeignFunctionInterface, MagicHash, UnboxedTuples #-}
 module MyForeignLib where
+import GHC.Exts
 import Foreign.C
 import Foreign.Ptr
 import Foreign.Storable
 import Foreign.Marshal
 import Data.Aeson
+import Data.Bits
 import Data.ByteString
 import Data.ByteString.Unsafe
 import MyLib (hs_factorial, birthday)
+
+import Unsafe.Coerce
+import GHC.IO
 
 foreign export ccall hs_factorial :: CInt -> CInt
 
@@ -37,4 +42,31 @@ c_birthday cstr clen result size_ptr = do
 
 foreign export ccall c_birthday :: Ptr CChar -> Int -> Ptr CChar -> Ptr Int -> IO ()
 
+data Rect
+  = Rect
+    { width :: {-# UNPACK #-} !Int
+    , height :: {-# UNPACK #-} !Int
+    }
+
+myrect :: Rect
+myrect = Rect 12 24
+
+rectToAddr :: Rect -> Ptr ()
+rectToAddr x = unsafePerformIO $ IO $ \rw ->
+  case anyToAddr# x rw of
+    (# rw, addr #) -> (# rw, Ptr addr #)
+
+give_rect :: Ptr ()
+give_rect =
+  let
+    -- Step 1
+    tagged_ptr = rectToAddr myrect :: Ptr ()
+    -- Step 1.5
+    untagged_ptr = wordPtrToPtr (complement 7 .&. ptrToWordPtr tagged_ptr)
+    -- Step 2
+    ptr_final = untagged_ptr `plusPtr` 8 :: Ptr () -- 8 bytes
+   in
+    ptr_final
+
+foreign export ccall give_rect :: Ptr ()
 
