@@ -9,6 +9,8 @@ import Data.ByteString
 import Data.ByteString.Unsafe
 import MyLib (hs_factorial, birthday)
 
+import Unsafe.Coerce
+
 foreign export ccall hs_factorial :: CInt -> CInt
 
 c_birthday :: Ptr CChar -> Int -> Ptr CChar -> Ptr Int -> IO ()
@@ -37,4 +39,27 @@ c_birthday cstr clen result size_ptr = do
 
 foreign export ccall c_birthday :: Ptr CChar -> Int -> Ptr CChar -> Ptr Int -> IO ()
 
+
+data Rect
+  = Rect
+    { width :: {-# UNPACK #-} !Int
+    , height :: {-# UNPACK #-} !Int
+    }
+
+myrect :: Rect
+myrect = Rect 12 24
+
+give_rect :: () -> Ptr ()
+give_rect () =
+  let
+    -- Step 1
+    tagged_ptr = unsafeCoerce myrect :: Ptr ()
+    -- Step 1.5
+    ptr_minus_1 = (unsafeCoerce tagged_ptr :: Word) - 1
+    ptr_con_info = unsafeCoerce ptr_minus_1 :: Ptr ()
+    -- Step 2
+    ptr_final = ptr_con_info `plusPtr` 8 :: Ptr () -- 8 bytes
+   in ptr_final
+
+foreign export ccall give_rect :: () -> Ptr ()
 
