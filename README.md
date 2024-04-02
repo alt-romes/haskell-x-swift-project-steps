@@ -10,6 +10,4 @@ functions with idiomatic Haskell types with Swift ones (both with and without
 marshaling), SwiftUI observation, and iOS development which requires GHC to
 produce code for the iOS compilation target.
 
-I'm pursuing this project, blog post, and future iterations of this project in my
-own free time. If you'd like to sponsor this project, visit [my GitHub sponsors page](https://github.com/sponsors/alt-romes).
-
+This work is being partially sponsored by [Well-Typed](https://well-typed.com/), and is otherwise carried out in my own free time.
