@@ -13,6 +13,16 @@ struct User: Codable {
     let age: Int
 }
 
+struct Rect {
+    let width: Int
+    let height: Int
+}
+
+func wrap_give_rect() -> Rect {
+    let y = give_rect()
+    return y!.load(as: Rect.self)
+}
+
 // birthday(user: User(name: "Anton", age: 33)) = User(name: "Anton", age: 34)
 func birthday (user : User) -> User {
     let enc = JSONEncoder()
@@ -68,7 +78,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             let user = birthday(user: User(name: "Ellie", age: 24))
+            let rect = wrap_give_rect()
             Text("Post-birthday, \(user.name) is: \(user.age)!")
+            Text("myrect: width is \(rect.width) and height is \(rect.height)!")
         }
         .padding()
     }
